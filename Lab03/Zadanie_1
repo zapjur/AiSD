@@ -1,0 +1,17 @@
+import os
+import shutil
+files = os.listdir('zadanie1/')
+basePath = "zadanie1/"
+for i in files:
+    directory = i[0]
+    path = os.path.join(basePath, directory)
+    try:
+        os.mkdir(path)
+    except FileExistsError:
+        pass
+
+for filename in files:
+    filePath = os.path.join(basePath, filename)
+    destinationPath = os.path.join(basePath, filename[0].upper())
+    shutil.move(filePath, destinationPath)
+

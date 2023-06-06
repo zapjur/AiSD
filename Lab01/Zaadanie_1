@@ -1,0 +1,38 @@
+import time
+stime = time.time()
+
+length = 48
+L = [0] * length
+L [0] = 1
+L [1] = 2
+
+for i in range (2,length):
+    L[i] = (L[i-1]+L[i-2])/(L[i-1]-L[i-2])
+print(L)
+
+print("Srednia:", sum(L)/length)
+
+ile = [1] * length
+for i in range(length):
+    for j in range(length):
+        if L[i] == L[j]:
+            ile[i]+1
+
+maxIndex = 0
+for i in range(length):
+    for j in range(length):
+        if ile[i] > ile[j]:
+            maxIndex = i
+
+print("Najczesciej w liscie pojawia sie:", L[maxIndex])
+
+brak = True
+for i in range(length):
+    if ile[i] > 1:
+        print(L[i])
+        brak = False
+
+if brak:
+    print("Nie ma wartosci ktora pojawia sie wiecej niz raz")
+
+print(time.time()-stime)

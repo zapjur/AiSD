@@ -1,0 +1,51 @@
+import random
+import math
+
+def sin(x):
+    return(math.sin(x))
+
+def circle(x,  y):
+    return(pow(x,2) + pow(y,2))
+
+def f(x, a, b, c):
+    return(a*pow(x, 2) + b*x + c)
+
+def monteCarlo_sin(sin, a, b, precision):
+    squareArea = abs(b - a) * max(sin(a), sin(b))
+    correctHits = 0
+
+    for i in range(precision):
+        x = random.uniform(a, b)
+        y = random.uniform(0, max(sin(a), sin(b)))
+        if y <= sin(x):
+            correctHits += 1
+        
+    return((correctHits/precision) * squareArea)
+
+def monteCarlo_circle(circle, R, precision):
+    squareArea =  4 * pow(R, 2)
+    correctHits = 0
+
+    for i in range(precision):
+        x = random.uniform(-R, R)
+        y = random.uniform(-R, R)
+        if circle(x, y) <= pow(R, 2):
+            correctHits += 1
+        
+    return((correctHits/precision) * squareArea)
+
+def monteCarlo_f(f, a, b, precision, ax, bx, cx):
+    squareArea = abs(b - a) * max(f(a, ax, bx, cx), f(b, ax, bx, cx))
+    correctHits = 0
+
+    for i in range(precision):
+        x = random.uniform(a, b)
+        y = random.uniform(0, max(f(a, ax, bx, cx), f(b, ax, bx, cx)))
+        if y <= f(x, ax, bx, cx):
+            correctHits += 1
+        
+    return((correctHits/precision) * squareArea)
+
+print(monteCarlo_circle(circle, 5, 10000))
+print(monteCarlo_sin(sin, 0, 2, 10000))
+print(monteCarlo_f(f, 0, 2, 10000, 2, 2, 2))

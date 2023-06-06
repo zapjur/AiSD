@@ -1,0 +1,66 @@
+import time
+
+def moveRecursion(n , sour, dest):
+    #print(f"Disk {n} from {sour} to {dest}")
+    pass
+def HanoiRecursion(n, sour, dest, buff):
+    if n == 1:
+        moveRecursion(n, sour, dest)
+        return 1
+
+    moves = 0
+    moves += int(HanoiRecursion(n-1, sour, buff, dest))
+    moveRecursion(n, sour, dest)
+    moves+=1
+    moves += int(HanoiRecursion(n-1, buff, dest, sour))
+    return moves
+
+def moveIterative(x, y, a, b):
+    #print(f"Disk {min(x)} from {a} to {b}")
+    y.append(min(x))
+    x.pop()
+
+def HanoiIterative(n, sour, dest, buff):
+    i=1
+    sour_val=[]
+    for a in range(n):
+        sour_val.append(n-a)
+    dest_val=[]
+    buff_val=[]
+    if n % 2 == 0:
+        buff, dest = dest, buff
+    while (n % 2 == 0 and (sour_val or dest_val)) or (n % 2 != 0 and (sour_val or buff_val)):
+        if i%3==1:
+            if not dest_val or (dest_val and sour_val and min(sour_val) < min(dest_val)):
+                moveIterative(sour_val, dest_val, sour, dest)
+            else:
+                moveIterative(dest_val, sour_val, dest, sour)
+        if i%3==2:
+            if not buff_val or (buff_val and sour_val and min(sour_val) < min(buff_val)):
+                moveIterative(sour_val, buff_val, sour, buff)
+            else:
+                moveIterative(buff_val, sour_val, buff, sour)
+        if i%3==0:
+            if not dest_val or (dest_val and buff_val and min(buff_val) < min(dest_val)):
+                moveIterative(buff_val, dest_val, buff, dest)
+            else:
+                moveIterative(dest_val, buff_val, dest, buff)
+        i+=1
+    return i - 1
+
+
+def main():
+    n = int(input("Disks:"))
+    stime = time.time()
+    HanoiRecursion(n,'A', 'B', 'C')
+    etime = time.time()
+    RecursionTime = etime - stime
+    s1time = time.time()
+    HanoiIterative(n, 'A', 'B', 'C')
+    e1time = time.time()
+    IterativeTime = e1time - s1time
+
+    print(f"Recursion time: {RecursionTime}")
+    print(f"IterativeTime: {IterativeTime}")
+
+main()

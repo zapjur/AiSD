@@ -1,0 +1,43 @@
+import Figures
+
+while True:
+    print("1. Cirlce")
+    print("2. Triangle")
+    print("3. Square")
+    choice = int(input("Choice:"))
+
+    if choice == 1:
+        r = int(input("Radius: "))
+        figure = Figures.Circle(r)
+        print("Surface:", figure.surface())
+        print("Circuit:", figure.circuit())
+        exit()
+
+    elif choice == 2:
+        a = int(input("Edge a: "))
+        b = int(input("Edge b: "))
+        c = int(input("Edge c: "))
+        figure = Figures.Triangle(a,b,c)
+        while True:
+            if figure.checkIfCorrect() == False:
+                print("Wrong!")
+                a = int(input("Edge a: "))
+                b = int(input("Edge b: "))
+                c = int(input("Edge c: "))
+                figure.setEdges(a,b,c)
+            else:
+                break
+        print("Surface:", figure.surface())
+        print("Circuit:", figure.circuit())
+        exit()
+
+    elif choice == 3:
+        a = int(input("Edge a: "))
+        figure = Figures.Square(a)
+        print("Surface:", figure.surface())
+        print("Circuit:", figure.circuit())
+        exit()
+
+    else:
+        print("Wrong input!")
+        exit()

@@ -1,0 +1,17 @@
+#musiałem usunąć plik SJP.txt z foldera, poniewaz był za duzy :(
+import time
+f = open('SJP.txt', 'r')
+sjp = f.read()
+f.close()
+userInput = input("Word:")
+if len(userInput.split()) > 1:
+    print("More than one word!")
+    exit()
+userInput = userInput.lower()
+stime = time.time()
+if sjp.find(userInput) == -1:
+    print("This word doesnt exist!")
+    print("Time:", time.time() - stime)
+else:
+    print("This word exists")
+    print("Time:", time.time() - stime)

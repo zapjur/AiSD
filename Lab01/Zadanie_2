@@ -1,0 +1,40 @@
+import time
+import array
+
+stime = time.time()
+
+length = 48
+arr = array.array('f',[0 for i in range(length)])
+arr [0] = 1
+arr [1] = 2
+
+for i in range (2,length):
+    arr[i] = (arr[i-1]+arr[i-2])/(arr[i-1]-arr[i-2])
+print(arr)
+
+print("Srednia:", sum(arr)/length)
+
+ile = [1] * length
+for i in range(length):
+    for j in range(length):
+        if arr[i] == arr[j]:
+            ile[i]+1
+
+maxIndex = 0
+for i in range(length):
+    for j in range(length):
+        if ile[i] > ile[j]:
+            maxIndex = i
+
+print("Najczesciej w liscie pojawia sie:", arr[maxIndex])
+
+brak = True
+for i in range(length):
+    if ile[i] > 1:
+        print(arr[i])
+        brak = False
+
+if brak:
+    print("Nie ma wartosci ktora pojawia sie wiecej niz raz")
+
+print(time.time()-stime)

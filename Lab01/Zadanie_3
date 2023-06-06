@@ -1,0 +1,23 @@
+import time
+
+length = 10000000
+list = [i for i in range(length)]
+
+stime = time.time()
+
+sum = 0
+for i in list:
+    sum =+ i
+
+print(sum)
+print("Czas:", time.time()-stime)
+
+stime = time.time()
+
+sum = 0
+for i in range(length):
+    sum =+ list[i]
+
+print(sum)
+print("Czas:", time.time()-stime)
+

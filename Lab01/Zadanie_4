@@ -1,0 +1,17 @@
+length = 10
+list = [i for i in range(length)]
+
+try:
+    x = lista[20] / 0
+except IndexError:
+    print("Wrong index!")
+    x = 0
+except ZeroDivisionError:
+    print("You cannot divide by zero!")
+    x = 0
+except NameError:
+    print("Spell it properly!")
+    pass
+
+
+
